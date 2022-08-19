@@ -1,0 +1,128 @@
+[8:49 pm, 06/08/2022] Velocity Paresh Chaudhary: public class InvocationCountPractice {
+	
+	@BeforeClass
+	public void launchBrowser() {
+		System.out.println("Browser is launched.");
+	}
+	
+	@AfterClass
+	public void closeBrowser() {
+		System.out.println("Browser is closed");
+	}
+	
+	@BeforeMethod
+	public void login() {
+		System.out.println("Logged in to the application sucessfully");
+	}
+	
+	@AfterMethod
+	public void logout() {
+		System.out.println("Logged out from the application sucessfully");
+	}
+	
+	@Test (invocationCount = 2)
+	public void homePageTest() {
+		System.out.println("Home page tested sucessfully");
+	}
+
+	@Test (invocationCount = 5)
+	public void profilePageTest() {
+		System.out.println("Profile page tested sucessfully");
+	}
+}
+[8:49 pm, 06/08/2022] Velocity Paresh Chaudhary: public class EnabledFalsePracticse {
+
+	@BeforeClass
+	public void launchBrowser() {
+		System.out.println("Browser is launched.");
+	}
+	
+	@AfterClass
+	public void closeBrowser() {
+		System.out.println("Browser is closed");
+	}
+	
+	@BeforeMethod
+	public void login() {
+		System.out.println("Logged in to the application sucessfully");
+	}
+	
+	@AfterMethod
+	public void logout() {
+		System.out.println("Logged out from the application sucessfully");
+	}
+	
+	@Test (invocationCount = 2)
+	public void homePageTest() {
+		System.out.println("Home page tested sucessfully");
+	}
+
+	@Test (invocationCount = 5, enabled = false)
+	public void profilePageTest() {
+		System.out.println("Profile page tested sucessfully");
+	}
+}
+[8:49 pm, 06/08/2022] Velocity Paresh Chaudhary: public class TimeoutsPractice {
+	@BeforeClass
+	public void launchBrowser() {
+		System.out.println("Browser is launched.");
+	}
+	
+	@AfterClass
+	public void closeBrowser() {
+		System.out.println("Browser is closed");
+	}
+	
+	@BeforeMethod
+	public void login() {
+		System.out.println("Logged in to the application sucessfully");
+	}
+	
+	@AfterMethod
+	public void logout() {
+		System.out.println("Logged out from the application sucessfully");
+	}
+	
+	@Test (priority = 2,timeOut = 5000)
+	public void homePageTest() throws InterruptedException {
+		Thread.sleep(4000);  // purpsoefully purpsoefully purpsoefully purpsoefully
+		System.out.println("Home page tested sucessfully");
+	}
+
+	@Test (priority=1)
+	public void profilePageTest() {
+		System.out.println("Profile page tested sucessfully");
+	}
+}
+[8:49 pm, 06/08/2022] Velocity Paresh Chaudhary: public class DependsonMethodPractice {
+	
+	@Test (priority = 1)
+	public void openurl() {
+		System.out.println("url opened");
+		Assert.fail();
+	}
+	
+	@Test(priority = 2, dependsOnMethods = "openurl")
+	public void login() {
+		System.out.println("Logged in to the application sucessfully");
+	}
+	
+	@Test (priority = 3,dependsOnMethods= {"openurl","login"} )
+	public void logout() {
+		System.out.println("Logged out from the application");
+	}
+	
+}
+[8:50 pm, 06/08/2022] Velocity Paresh Chaudhary: public class ThreadPoolSizePractice {
+	
+	@Test (invocationCount = 5,threadPoolSize = 5)
+	public void openBrowser() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\DELL\\Desktop\\Selenium All Jars\\chromedriver_win32 (102)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.facebook.com/");
+		driver.manage().window().maximize();
+		System.out.println(driver.getTitle());
+		driver.close();
+	}
+
+}
